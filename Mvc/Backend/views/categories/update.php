@@ -68,18 +68,6 @@
                     <option value="0" <?php echo $selected_disabled; ?>>Disable</option>
                 </select>
             </div>
-            <!-- checkbox -->
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input name="hotcategory" type="checkbox"
-                            <?php if(isset($category["hotcategory"]) && $category["hotcategory"]== 1 ) : ?> checked
-                            <?php endif; ?>
-                            value="<?php echo isset($category["hotcategory"]) ? $category["hotcategory"] : '' ?>">
-                        Sản phẩm hot
-                    </label>
-                </div>
-            </div>
             <div>
                 <input class="btn btn-success" type="submit" value="Sửa danh mục" name="submit">
                 <a class="btn btn-danger" href="index.php?area=backend&controller=category">Hủy</a>

@@ -14,22 +14,17 @@ class HomeController extends Controller
         $countNoUser = $user_model->CountNoUser();
         $product_model = new Product();
         $order_model = new ShoppingCart();
+
+        // Sử dụng LIMIT 5 để giới hạn kết quả của truy vấn
+
         $countProductOut = $product_model->countProductOut();
 
         // Assuming you have a method in your ShoppingCart model to get orders by month
-        $monthlyOrders = $order_model->getOrdersByMonth();
 
         // Convert the data to a format that can be easily used in JavaScript
-        $months = [];
         $orderCounts = [];
 
-        foreach ($monthlyOrders as $monthData) {
-            $months[] = $monthData['month'];
-            $orderCounts[] = $monthData['order_count'];
-        }
-
         // Convert arrays to JSON for JavaScript
-        $monthsJson = json_encode($months);
         $orderCountsJson = json_encode($orderCounts);
 
         $output = [
@@ -37,7 +32,6 @@ class HomeController extends Controller
             'countUser' => $countUser,
             'countNoUser' => $countNoUser,
             'countProductOut' => $countProductOut,
-            "monthsJson" => $monthsJson, 
             "orderCountsJson" => $orderCountsJson
         ];
         $this->content = $this->render('Mvc/Backend/views/home/home.php', $output);

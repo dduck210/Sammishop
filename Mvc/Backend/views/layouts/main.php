@@ -41,7 +41,7 @@
                 </div>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <!--            -->
-                <?php if ($_SESSION["user_admin"]["status"] == 0) : ?>
+                <?php if ($_SESSION["user_admin"]["status"] == 1) : ?>
 
                 <ul class="sidebar-menu" data-widget="tree" style="border-top: 1px solid aqua;">
                     <li class="header" style="text-align: center;border-bottom: 1px solid aqua">DANH SÁCH CHỨC NĂNG</li>

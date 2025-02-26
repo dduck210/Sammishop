@@ -8,10 +8,6 @@
         <li class="active"> <i class="fa fa-address-book"></i> Danh sách đơn hàng</li>
     </ol>
 </section>
-<div style="margin: 10px 250px">
-    <input style="padding: 22px 12px !important;" type="text" id="search_shopping" name="search_shopping"
-        class="form-control" placeholder="Nhập họ tên hoặc SĐT đơn hàng cần tìm kiếm  .......">
-</div>
 
 <div align="right" style="margin:0px 0px 15px 0px;">
     <a class="btn btn-success" onclick="return confirm('Bạn có chắc chắn muốn xác nhận toàn bộ ?')"
@@ -95,67 +91,5 @@
             <?php endif; ?>
     </table>
 
-    <div align="center">
-        <ul class='pagination text-center' id="pagination_order">
-            <?php if ($numPage == 1) {
-        return '';
-      }
-      ?>
-            <?php if ($page > 1) :
-        $prev_page = $page - 1;
-      ?>
-            <li class="page-item" id="<?php echo $prev_page; ?>">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <?php endif; ?>
-            <?php for ($i = 1; $i <= $numPage; $i++) :
-        if ($i == $page) : ?>
-            <li class="page-item active" id="<?php echo $i ?>">
-                <a class="page-link active" href="#"><?php echo $i; ?></a>
-            </li>
-            <?php else : ?>
-            <li class="page-item" id="<?php echo $i ?>">
-                <a class="page-link " href="#"><?php echo $i ?></a>
-            </li>
-            <?php endif;
-      endfor; ?>
-            <?php if ($page < $numPage) :
-        $next_page = $page + 1;
-      ?>
-            <li class="page-item" id="<?php echo $next_page; ?>">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-            <?php endif; ?>
-    </div>
     <script>
-    $(document).ready(function() {
-        function loadTableOder(page, query = "") {
-            $.ajax({
-                url: "index.php?area=backend&controller=ShoppingCart&action=search",
-                type: "POST",
-                data: {
-                    page: page,
-                    query: query
-                },
-                success: function(data) {
-                    $("#order").html(data);
-                }
-            });
-        }
-        $(document).on("click", "#pagination_order li", function(e) {
-            e.preventDefault();
-            var page_id = $(this).attr("id");
-            var query = $("#search_shopping").val();
-            loadTableOder(page_id, query);
-        });
-        $("#search_shopping").keyup(function() {
-            var query = $("#search_shopping").val();
-            var page_id = $(this).attr("id");
-            loadTableOder(page_id, query);
-        })
-    });
     </script>

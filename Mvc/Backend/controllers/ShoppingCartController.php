@@ -36,12 +36,10 @@ class ShoppingCartController extends Controller
     $countOrder = $order_model->countTotal();
     $numPage = ceil($countOrder / $pageSize);
     $carts = $order_model->listOrder($pageSize, $page);
-    $deliveryUsers = $order_model->getDeliveryUsersList();
     $this->content = $this->render("Mvc/backend/views/shoppingcart/index.php", [
       "carts" => $carts,
       "numPage" => $numPage,
       "page" => $page,
-      "deliveryUsers" => $deliveryUsers
     ]);
     require_once "Mvc/backend/views/layouts/main.php";
   }
