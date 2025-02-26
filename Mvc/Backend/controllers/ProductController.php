@@ -31,7 +31,7 @@ class ProductController extends Controller{
 //    search sản phẩm
     public function search()
     {
-        $pageSize=3;
+        $pageSize=5;
         $page="";
 
         if(isset($_POST["page"]) && is_numeric($_POST["page"]))

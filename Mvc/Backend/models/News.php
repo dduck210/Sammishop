@@ -6,7 +6,6 @@ class News extends Model{
     public $status;
     public $category_id;
     public $summary;
-    public $hotnews;
     public $created_at;
     public $updated_at;
 // lấy ra danh sách danh mục tin tức
@@ -35,8 +34,8 @@ class News extends Model{
     }
 // thêm danh mục sản phẩm tin tức
     public function insert(){
-        $sql_insert="Insert into news(`name`,`avatar`,`content`,`status`,`category_id`,`summary`,`hotnews`)
-        VALUES (:name,:avatar,:content,:status,:category_id,:summary,:hotnews)";
+        $sql_insert="Insert into news(`name`,`avatar`,`content`,`status`,`category_id`,`summary`)
+        VALUES (:name,:avatar,:content,:status,:category_id,:summary)";
         $obj_insert=$this->connection->prepare($sql_insert);
         $arr_insert=[
             ':name' => $this->name,
@@ -44,8 +43,7 @@ class News extends Model{
             ':content' => $this->content,
             ':status' => $this->status,
             ':category_id' => $this->category_id,
-            ':summary' => $this->summary,
-            ':hotnews' => $this->hotnews,
+            ':summary' => $this->summary
         ];
         return $obj_insert->execute($arr_insert);
     }
@@ -69,8 +67,7 @@ class News extends Model{
     }
 //    chỉnh sửa danh mục tin tức
     public function update($id){
-        $sql_update="Update news set `name`=:name,`status`=:status,`category_id`=:category_id,`avatar`=:avatar,`summary`=:summary,`content`=:content,
-                      `hotnews`=:hotnews,`updated_at`=:updated_at where id=$id";
+        $sql_update="Update news set `name`=:name,`status`=:status,`category_id`=:category_id,`avatar`=:avatar,`summary`=:summary,`content`=:content,`updated_at`=:updated_at where id=$id";
         $obj_update=$this->connection->prepare($sql_update);
         $arr_update=[
             ':name' => $this->name,
@@ -79,8 +76,7 @@ class News extends Model{
             ':status' => $this->status,
             ':category_id' => $this->category_id,
             ':summary' => $this->summary,
-            ':hotnews' => $this->hotnews,
-            ":updated_at" => $this->updated_at,
+            ":updated_at" => $this->updated_at
         ];
         return $obj_update->execute($arr_update);
 

@@ -66,7 +66,7 @@ class ShippingController extends Controller
     $order_model->updated_at = date('Y-m-d H:i:s');
     $is_update = $order_model->sentStatusOrder2($id);
     if ($is_update) {
-      $_SESSION['success'] = 'Đã xác nhân đơn hàng';
+      $_SESSION['success'] = 'Đã xác nhận đơn hàng';
     } else {
       $_SESSION['error'] = 'Đơn hàng có vấn đề';
     }
