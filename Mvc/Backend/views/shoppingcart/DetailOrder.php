@@ -1,7 +1,7 @@
 <section class="content-header" style="margin-bottom: 15px;">
     <h1>
         Danh sách đơn hàng
-        <small>SammiShop</small>
+        <small></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="index.php?area=backend"><i class="fa fa-home"></i> Trang Chủ</a></li>
@@ -17,7 +17,7 @@ $id=$_GET['id'];
 ?>
 
 <?php
-if($order["payment_status"] !=1  && $order["status"] !=3 && ($_SESSION["user_admin"]["status"] == 1) ):
+if($order["payment_status"] !=1  && $order["status"] !=3 && $_SESSION["user_admin"]["status"] != 0):
   ?>
 <a href="index.php?area=backend&controller=ShoppingCart&action=send_payment&id=<?php echo $id; ?> "
     onclick="return confirm('Bạn có chắc chắn người này đã thanh toán ?')" class="btn btn-primary">Xác nhận đã thanh
@@ -25,7 +25,7 @@ if($order["payment_status"] !=1  && $order["status"] !=3 && ($_SESSION["user_adm
 <?php endif;
 ?>
 <?php
-if($order["status"] !=1 && $order["status"] !=3 && ($_SESSION["user_admin"]["status"] == 1) ):
+if($order["status"] !=1 && $order["status"] !=3 && $_SESSION["user_admin"]["status"] != 1):
   ?>
 <a href="index.php?area=backend&controller=ShoppingCart&action=send_status&id=<?php echo $id; ?> "
     onclick="return confirm('Bạn có chắc chắn xác nhận đơn hàng này không ?')" class="btn btn-success">Xác nhận đơn
@@ -43,8 +43,8 @@ if($order["status"] !=1 && $order["status"] !=3 && ($_SESSION["user_admin"]["sta
             <th style="text-align: center;"> % Khuyến Mại</th>
             <th style="text-align: center;">Thành Tiền</th>
         </tr>
-        <?php if (!empty($products)): ?>
-        <?php foreach ($products as $product):?>
+        <?php if (!empty($oders)): ?>
+        <?php foreach ($oders as $product):?>
         <tr>
             <td>
                 <?php echo $product["product_name"];?>
@@ -85,8 +85,7 @@ if($order["status"] !=1 && $order["status"] !=3 && ($_SESSION["user_admin"]["sta
         <p> Thành Tiền : <?php echo number_format($total); ?> VND</p>
     </div>
     <div>
-        <a style="margin-left: 15px"
-            href="<?php echo ($_SESSION["user_admin"]["status"] == 0) ? 'index.php?area=backend&controller=shipping' : 'index.php?area=backend&controller=ShoppingCart'; ?>"
+        <a style="margin-left: 15px" href="index.php?area=backend&controller=home&action=OrderNoUser"
             class="btn btn-primary">Quay lại</a>
     </div>
     <br>

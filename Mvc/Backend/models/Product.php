@@ -82,8 +82,8 @@ class Product extends Model
     public function insert()
     {
         $obj_insert = $this->connection
-            ->prepare("INSERT INTO products(category_id, producer_id, title, avatar, price, quality, discount, summary, content, status, hotproduct, expiration_date, total_number_rating, total_rating) 
-                        VALUES (:category_id, :producer_id, :title, :avatar, :price, :quality, :discount, :summary, :content, :status, :hotproduct, :expiration_date, :total_number_rating, :total_rating)");
+            ->prepare("INSERT INTO products(category_id, producer_id, title, avatar, price, quality, discount, summary, content, status, hotproduct) 
+                        VALUES (:category_id, :producer_id, :title, :avatar, :price, :quality, :discount, :summary, :content, :status, :hotproduct)");
     
         $arr_insert = [
             ':category_id' => $this->category_id,
@@ -97,9 +97,6 @@ class Product extends Model
             ':content' => $this->content,
             ':status' => $this->status,
             ':hotproduct' => $this->hotproduct,
-            ':expiration_date' => $this->expiration_date,
-            ':total_number_rating' => 0, // Provide a value or calculate as needed
-            ':total_rating' => 0, // Provide a value or calculate as needed
         ];
     
         $obj_insert->execute($arr_insert);
@@ -165,33 +162,6 @@ class Product extends Model
         $obj_select->execute();
         $users = $obj_select->fetchAll(PDO::FETCH_ASSOC);
         return $users;
-    }
-
-    public function countTotalExpiringWithinThreeDays($currentDate, $threeDaysFromNow)
-    {
-        $sql_count = "SELECT COUNT(id) FROM products WHERE expiration_date >= :currentDate AND expiration_date <= :threeDaysFromNow";
-        $obj_select = $this->connection->prepare($sql_count);
-        $obj_select->bindParam(':currentDate', $currentDate, PDO::PARAM_STR);
-        $obj_select->bindParam(':threeDaysFromNow', $threeDaysFromNow, PDO::PARAM_STR);
-        $obj_select->execute();
-        return $obj_select->fetchColumn();
-    }
-
-    public function getAllExpiringWithinThreeDays($currentDate, $threeDaysFromNow, $pageSize, $page)
-    {
-        $from = ($page - 1) * $pageSize;
-        $sql_select = "SELECT products.*, categories.name as category_name, producers.name as producer_name FROM products 
-                        INNER JOIN categories ON products.category_id = categories.id
-                        INNER JOIN producers ON products.producer_id = producers.id
-                        WHERE products.expiration_date >= :currentDate AND products.expiration_date <= :threeDaysFromNow
-                        LIMIT $from, $pageSize";
-    
-        $obj_select = $this->connection->prepare($sql_select);
-        $obj_select->bindParam(':currentDate', $currentDate, PDO::PARAM_STR);
-        $obj_select->bindParam(':threeDaysFromNow', $threeDaysFromNow, PDO::PARAM_STR);
-        $obj_select->execute();
-        $products = $obj_select->fetchAll(PDO::FETCH_ASSOC);
-        return $products;
     }
     
 }

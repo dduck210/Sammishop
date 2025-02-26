@@ -1,30 +1,10 @@
 <?php
 require_once "Mvc/Backend/Models/ShoppingCart.php";
-class ShoppingCartController extends Controller
+class ShippingController extends Controller
 {
-
-  // Thêm hàm để cập nhật người giao hàng cho đơn hàng
-  public function updateDeliveryUser()
-  {
-    if (isset($_POST['order_id']) && isset($_POST['delivery_user_id'])) {
-      $order_model = new ShoppingCart();
-      $orderId = $_POST['order_id'];
-      $isUpdated = $order_model->updateDeliveryUser($orderId, $deliveryUserId);
-      if ($isUpdated) {
-        $_SESSION['success'] = 'Đã cập nhật người giao hàng thành công.';
-      } else {
-        $_SESSION['error'] = 'Cập nhật người giao hàng thất bại.';
-      }
-    } else {
-      $_SESSION['error'] = 'Thiếu thông tin cập nhật.';
-    }
-    header('Location: index.php?area=backend&controller=ShoppingCart');
-    exit();
-  }
-
   public function index()
   {
-    $pageSize = 2;
+    $pageSize = 10;
     $page = "";
     if (isset($_POST["page"]) && is_numeric($_POST["page"])) {
       $page = $_POST["page"];
@@ -34,12 +14,7 @@ class ShoppingCartController extends Controller
     $order_model = new ShoppingCart();
     $countOrder = $order_model->countTotal();
     $numPage = ceil($countOrder / $pageSize);
-    $carts = $order_model->listOrder($pageSize, $page);
-    $this->content = $this->render("Mvc/backend/views/shoppingcart/index.php", [
-      "carts" => $carts,
-      "numPage" => $numPage,
-      "page" => $page
-    ]);
+    $adminUserId = $_SESSION["user_admin"]["id"];
     require_once "Mvc/backend/views/layouts/main.php";
   }
   public function detail()
@@ -83,19 +58,19 @@ class ShoppingCartController extends Controller
   {
     if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
       $_SESSION['error'] = 'ID không hợp lệ';
-      header('Location: index.php?area=backendcontroller=ShoppingCart');
+      header('Location: index.php?area=backendcontroller=shipping');
       exit();
     }
     $id = $_GET["id"];
     $order_model = new ShoppingCart();
     $order_model->updated_at = date('Y-m-d H:i:s');
-    $is_update = $order_model->sentStatusOrder($id);
+    $is_update = $order_model->sentStatusOrder2($id);
     if ($is_update) {
       $_SESSION['success'] = 'Đã xác nhân đơn hàng';
     } else {
       $_SESSION['error'] = 'Đơn hàng có vấn đề';
     }
-    header('Location: index.php?area=backend&controller=ShoppingCart');
+    header('Location: index.php?area=backend&controller=shipping');
     exit();
   }
   public function send_statusAll()
@@ -123,7 +98,7 @@ class ShoppingCartController extends Controller
     $order_model->updated_at = date('Y-m-d H:i:s');
     $is_update = $order_model->delete_Oder($id);
     if ($is_update) {
-      $_SESSION['success'] = 'Đã hàng đã được hủy';
+      $_SESSION['success'] = 'Đơn hàng đã được hủy';
     } else {
       $_SESSION['error'] = 'Đơn hàng có vấn đề';
     }

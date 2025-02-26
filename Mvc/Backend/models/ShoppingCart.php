@@ -1,30 +1,11 @@
 <?php
 class ShoppingCart extends Model {
-  // Thêm hàm để lấy danh sách người giao hàng
-  public function getDeliveryUsersList()
-  {
-      $sql = "SELECT id, fullname FROM users WHERE status = 0"; // Điều kiện status = 0 để lấy người giao hàng
-      $obj_select = $this->connection->prepare($sql);
-      $obj_select->execute();
-      $deliveryUsers = $obj_select->fetchAll(PDO::FETCH_ASSOC);
-      return $deliveryUsers;
-  }
-
 
   public function listOrder() {
+    // Không sử dụng limit và phân trang nữa
     $obj_select = $this->connection->prepare("SELECT * FROM orders ORDER BY orders.created_at DESC");
     $arr_select = [];
     $obj_select->execute($arr_select);
-    $orders = $obj_select->fetchAll(PDO::FETCH_ASSOC);
-    return $orders;
-}
-
-
-  public function listOrderByDeliveryUserId($deliveryUserId, $pageSize, $page) {
-    $from = ($page - 1) * $pageSize;
-    $obj_select = $this->connection->prepare("SELECT * FROM orders WHERE delivery_user_id = :deliveryUserId ORDER BY created_at DESC LIMIT");
-    $obj_select->bindParam(':deliveryUserId', $deliveryUserId, PDO::PARAM_INT);
-    $obj_select->execute();
     $orders = $obj_select->fetchAll(PDO::FETCH_ASSOC);
     return $orders;
 }
@@ -54,6 +35,14 @@ class ShoppingCart extends Model {
     $orders = $obj_select->fetch(PDO::FETCH_ASSOC);
     return $orders;
   }
+  public function countorderSearch($search)
+  {
+    $obj_select=$this->connection->
+    prepare("select count(orders.id) from orders where  phone like '%$search%' or fullname like '%$search%'");
+
+    $obj_select->execute();
+    return $obj_select->fetchColumn();
+  }
   public function listProduct($id)
   {
     $sql_select_product = "select order_details.*,products.title as product_name,products.discount as product_discount,
@@ -80,7 +69,14 @@ class ShoppingCart extends Model {
     return $obj_update->execute($arr_update);
   }
 
+  public function sentStatusOrder2($id){
+    $update_order = "update orders set status=4,updated_at=:updated_at where id=$id";
+    $obj_update=$this->connection->prepare($update_order);
+    $arr_update=[  ':updated_at' => $this->updated_at];
+    return $obj_update->execute($arr_update);
+  }
   public function sentStatusAll(){
+
     $update_order = "update orders set status=1,updated_at=:updated_at where status=0";
     $obj_update=$this->connection->prepare($update_order);
     $arr_update=[  ':updated_at' => $this->updated_at];
@@ -97,5 +93,20 @@ class ShoppingCart extends Model {
         $obj_select=$this->connection->prepare("select count(orders.id) from orders where status=0");
         $obj_select->execute();
         return $obj_select->fetchColumn();
+    }
+
+    public function getOrdersByMonth()
+    {
+        $query = "SELECT MONTH(created_at) AS month, COUNT(*) AS order_count
+                  FROM orders
+                  GROUP BY MONTH(created_at)
+                  ORDER BY MONTH(created_at)";
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute();
+
+        $monthlyOrders = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $monthlyOrders;
     }
 }

@@ -48,10 +48,10 @@
             </div>
             <!--          -->
             <div class="form-group">
-                <label for="content">Miêu tả danh mục :</label>
-                <textarea class="form-control" name="content" id="content" rows="5"
-                    placeholder="Miêu tả chi tiết danh mục ..."><?php echo isset($_POST['content']) ? $_POST["content"] : "" ?></textarea>
+                <label for="">Miêu tả danh mục :</label>
+                <input type="text" class="form-control" name="content" placeholder="Miêu tả chi tiết danh mục ...">
             </div>
+
 
             <!-- input states -->
             <div class="form-group">

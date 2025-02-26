@@ -5,7 +5,8 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="index.php?area=backend"><i class="fa fa-home"></i> Trang Chủ</a></li>
-        <li><a href="index.php?area=backend&controller=product"><i class="fa fa-address-book"></i> Danh sách sản phẩm</a></li>
+        <li><a href="index.php?area=backend&controller=product"><i class="fa fa-address-book"></i> Danh sách sản
+                phẩm</a></li>
         <li class="active">Thêm Sản phẩm</li>
     </ol>
 </section>
@@ -16,7 +17,9 @@
                 <div class="box-body">
                     <div class="form-group">
                         <label for="c_name">Tên Sản phẩm :</label>
-                        <input type="text" minlength="6" value="<?php echo isset($_POST['title']) ? $_POST['title'] : '' ?>" class="form-control required" name="title" placeholder="Nhập tên sản phẩm ...">
+                        <input type="text" minlength="6"
+                            value="<?php echo isset($_POST['title']) ? $_POST['title'] : '' ?>"
+                            class="form-control required" name="title" placeholder="Nhập tên sản phẩm ...">
                     </div>
                     <div class="form-group">
                         <label>Ảnh đại diện :</label>
@@ -28,17 +31,14 @@
                     </div>
                     <div class="form-group">
                         <label for="summary">Mô tả ngắn sản phẩm :</label>
-                        <textarea cols="30" rows="5" class="form-control " placeholder="Mô tả chi tiết sản phâm" name="summary"><?php echo isset($_POST['summary']) ? $_POST['summary'] : '' ?></textarea>
+                        <textarea cols="30" rows="5" class="form-control " placeholder="Mô tả chi tiết sản phâm"
+                            name="summary"><?php echo isset($_POST['summary']) ? $_POST['summary'] : '' ?></textarea>
                     </div>
                     <div class="form-group">
                         <label for="summary">Mô tả chi tiết sản phẩm :</label>
-                        <textarea cols="30" rows="5" class="form-control " placeholder="Mô tả chi tiết sản phâm" name="content"><?php echo isset($_POST['content']) ? $_POST['content'] : '' ?></textarea>
+                        <textarea cols="30" rows="5" class="form-control " placeholder="Mô tả chi tiết sản phâm"
+                            name="content"><?php echo isset($_POST['content']) ? $_POST['content'] : '' ?></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="expiration_date">Ngày hết hạn sản phẩm:</label>
-                        <input type="date" name="expiration_date" class="form-control" id="expiration_date">
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -50,11 +50,11 @@
                         <label for="category_id">Chọn danh mục :</label>
                         <select name="category_id" class="form-control" id="category_id">
                             <?php if (empty($categories)) : ?>
-                                <option value="">Không có danh mục nào</option>
+                            <option value="">Không có danh mục nào</option>
                             <?php else : ?>
-                                <option value="">-- Tất cả danh mục -- </option>
-                                <?php foreach ($categories as $category) : ?>
-                                    <option value="<?php echo $category['id'] ?>"><?php echo $category['name']; ?></option>
+                            <option value="">-- Tất cả danh mục -- </option>
+                            <?php foreach ($categories as $category) : ?>
+                            <option value="<?php echo $category['id'] ?>"><?php echo $category['name']; ?></option>
                             <?php endforeach;
                             endif;
                             ?>
@@ -65,11 +65,11 @@
                         <label for="producer_id">Chọn Thương hiệu :</label>
                         <select name="producer_id" class="form-control" id="producer_id">
                             <?php if (empty($producers)) : ?>
-                                <option value="">Không có thương hiệu nào</option>
+                            <option value="">Không có thương hiệu nào</option>
                             <?php else : ?>
-                                <option value="">-- Tất cả thương hiệu -- </option>
-                                <?php foreach ($producers as $producer) : ?>
-                                    <option value="<?php echo $producer['id'] ?>"><?php echo $producer['name']; ?></option>
+                            <option value="">-- Tất cả thương hiệu -- </option>
+                            <?php foreach ($producers as $producer) : ?>
+                            <option value="<?php echo $producer['id'] ?>"><?php echo $producer['name']; ?></option>
                             <?php endforeach;
                             endif;
                             ?>
@@ -78,15 +78,21 @@
                     <!--                  -->
                     <div class="form-group">
                         <label for="price">Giá sản phẩm :</label>
-                        <input type="number" name="price" value="<?php echo isset($_POST['price']) ? $_POST['price'] : '' ?>" class="form-control" id="price">
+                        <input type="number" name="price"
+                            value="<?php echo isset($_POST['price']) ? $_POST['price'] : '' ?>" class="form-control"
+                            id="price">
                     </div>
                     <div class="form-group">
                         <label for="discount">% Khuyến Mại :</label>
-                        <input type="number" name="discount" value="<?php echo isset($_POST['discount']) ? $_POST['discount'] : 0 ?>" class="form-control" id="discount">
+                        <input type="number" name="discount"
+                            value="<?php echo isset($_POST['discount']) ? $_POST['discount'] : 0 ?>"
+                            class="form-control" id="discount">
                     </div>
                     <div class="form-group">
                         <label for="quality">Số Lượng :</label>
-                        <input type="number" name="quality" value="<?php echo isset($_POST['quality']) ? $_POST['quality'] : '' ?>" class="form-control" id="quality">
+                        <input type="number" name="quality"
+                            value="<?php echo isset($_POST['quality']) ? $_POST['quality'] : '' ?>" class="form-control"
+                            id="quality">
                         <p class="error"></p>
                     </div>
                     <div class="form-group">
@@ -128,53 +134,53 @@
 
 
 <script>
-    $("#product_create").validate({
-        rules: {
-            title: {
-                required: true
-            },
-            avatar: {
-                extension: "jpg|png|jpeg|gif"
-            },
-            status: {
-                required: true
-            },
-            category_id: {
-                required: true
-            },
-            price: {
-                required: true
-            },
-            quality: {
-                required: true
-            },
-            producer_id: {
-                required: true
-            },
+$("#product_create").validate({
+    rules: {
+        title: {
+            required: true
+        },
+        avatar: {
+            extension: "jpg|png|jpeg|gif"
+        },
+        status: {
+            required: true
+        },
+        category_id: {
+            required: true
+        },
+        price: {
+            required: true
+        },
+        quality: {
+            required: true
+        },
+        producer_id: {
+            required: true
+        },
 
+    },
+    messages: {
+        title: {
+            required: " * Bạn phải nhập tên danh mục"
         },
-        messages: {
-            title: {
-                required: " * Bạn phải nhập tên danh mục"
-            },
-            avatar: {
-                extension: "Chỉ tải lên các file có định dạng  jpg , png , jpeq , gif "
-            },
-            category_id: {
-                required: " * Chọn danh mục cho sản phẩm"
-            },
-            status: {
-                required: " * Chọn trạng thái của danh mục"
-            },
-            price: {
-                required: " * Bạn phải nhập giá cho sản phẩm"
-            },
-            quality: {
-                required: " * Bạn phải nhập số lượng cho sản phẩm"
-            },
-            producer_id: {
-                required: " * Chọn thương hiệu cho sản phẩm"
-            },
+        avatar: {
+            extension: "Chỉ tải lên các file có định dạng  jpg , png , jpeq , gif "
         },
-    });
+        category_id: {
+            required: " * Chọn danh mục cho sản phẩm"
+        },
+        status: {
+            required: " * Chọn trạng thái của danh mục"
+        },
+        price: {
+            required: " * Bạn phải nhập giá cho sản phẩm"
+        },
+        quality: {
+            required: " * Bạn phải nhập số lượng cho sản phẩm"
+        },
+        producer_id: {
+            required: " * Chọn thương hiệu cho sản phẩm"
+        },
+    },
+});
 </script>

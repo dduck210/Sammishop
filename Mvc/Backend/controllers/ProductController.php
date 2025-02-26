@@ -5,7 +5,7 @@ require_once 'Mvc/Backend/models/Producer.php';
 require_once 'Mvc/Backend/models/product_images.php';
 class ProductController extends Controller{
     public function index(){
-        $pageSize=3;
+        $pageSize=5;
         $page="";
         if(isset($_POST["page"]) && is_numeric($_POST["page"]))
         {

@@ -3,7 +3,6 @@
     require_once "App/controllers/controller.php";
     require_once "App/database/Model.php";
     require_once "App/helpers/helper.php";
-    date_default_timezone_set('Asia/Ho_Chi_Minh');
     $area=isset($_GET["area"]) ? $_GET["area"] : 'Frontend';
     $controller=isset($_GET["controller"]) ? $_GET["controller"] : 'home';
     $action=isset($_GET["action"]) ? $_GET["action"] : 'index';

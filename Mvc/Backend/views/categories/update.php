@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label for="content">Miêu tả danh mục :</label>
-                <textarea class="form-control" name="content" id="content" rows="5"
+                <textarea class="form-control" rows="5"
                     placeholder="Miêu tả chi tiết danh mục ..."><?php echo isset($category['content']) ? $category["content"] : "" ?></textarea>
             </div>
             <!-- input states -->
