@@ -123,7 +123,7 @@ class ShoppingCartController extends Controller
     $order_model->updated_at = date('Y-m-d H:i:s');
     $is_update = $order_model->delete_Oder($id);
     if ($is_update) {
-      $_SESSION['success'] = 'Đã hàng đã được hủy';
+      $_SESSION['success'] = 'Đơn hàng đã được hủy';
     } else {
       $_SESSION['error'] = 'Đơn hàng có vấn đề';
     }

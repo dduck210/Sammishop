@@ -77,7 +77,7 @@
                 </select>
             </div>
             <div>
-                <input class="btn btn-success" type="submit" value="Thêm sản phẩm" name="submit">
+                <input class="btn btn-success" type="submit" value="Thêm danh mục" name="submit">
                 <a class="btn btn-danger" href="index.php?area=backend&controller=category">Hủy</a>
             </div>
         </form>

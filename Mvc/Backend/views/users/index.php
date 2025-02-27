@@ -1,6 +1,6 @@
 <section class="content-header" style="margin-bottom: 15px;">
     <h1>
-        Danh sách đơn hàng
+        Danh sách tài khoản
         <small></small>
     </h1>
     <ol class="breadcrumb">

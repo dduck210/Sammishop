@@ -95,18 +95,18 @@ class ShoppingCart extends Model {
         return $obj_select->fetchColumn();
     }
 
-    public function getOrdersByMonth()
-    {
-        $query = "SELECT MONTH(created_at) AS month, COUNT(*) AS order_count
-                  FROM orders
-                  GROUP BY MONTH(created_at)
-                  ORDER BY MONTH(created_at)";
+    // public function getOrdersByMonth()
+    // {
+    //     $query = "SELECT MONTH(created_at) AS month, COUNT(*) AS order_count
+    //               FROM orders
+    //               GROUP BY MONTH(created_at)
+    //               ORDER BY MONTH(created_at)";
 
-        $statement = $this->connection->prepare($query);
-        $statement->execute();
+    //     $statement = $this->connection->prepare($query);
+    //     $statement->execute();
 
-        $monthlyOrders = $statement->fetchAll(PDO::FETCH_ASSOC);
+    //     $monthlyOrders = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        return $monthlyOrders;
-    }
+    //     return $monthlyOrders;
+    // }
 }

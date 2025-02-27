@@ -2,10 +2,11 @@
 // Kiểm tra xem người dùng đã đăng nhập chưa (kiểm tra có user_id trong session không)
 if (!isset($_SESSION["user_account"]) || empty($_SESSION["user_account"]["id"])) {
     // Nếu không có user_id trong session, chuyển hướng người dùng đến trang đăng nhập
-    header("Location: login.php"); // Bạn có thể thay đổi đường dẫn này thành trang login của bạn
-    exit; // Dừng đoạn mã PHP lại để không thực thi phần còn lại của form thanh toán
+    header("Location: dang-nhap");  // Chuyển hướng đến trang đăng nhập
+    exit; // Dừng đoạn mã PHP lại để không thực thi phần còn lại của mã
 }
 ?>
+
 
 <div class="container" style="background-color: white;">
     <form action="" method="post" style="padding: 25px;border-radius: 10px" id="shopping_pay">
