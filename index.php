@@ -37,5 +37,5 @@ if (!method_exists($obj, $action)) {
 }
 
 // Gọi phương thức (action) trong controller
-$obj->$action();  // Thực thi action (ví dụ: index, show, etc.)
+$obj->$action();  // Thực thi action 
 ?>
