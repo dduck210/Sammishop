@@ -31,7 +31,7 @@
 
                             <p>
                                 <?php echo $_SESSION['user_admin']["fullname"]; ?>
-                                <small>Member since Nov. 2023</small>
+                                <small>Member since Nov. 2025</small>
                             </p>
                         </li>
                         <li class="user-footer">
